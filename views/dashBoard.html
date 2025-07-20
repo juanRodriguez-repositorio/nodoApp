@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="UTF-8" />
+  <title>Nodo</title>
+  <link rel="stylesheet" type="text/css" href="/css/dashBoard.css">
+  <link rel="icon" href="/images/favicon.png" type="image/png">
+ </head>
+<body id="body">
+  <header class="header">
+    <div class="logo-container">
+      <div class="logo-icon"></div>
+      <h1 class="site-title">Nodo</h1>
+    </div>
+    <div class="nav-options">
+      <div class="nav-options_search">
+        <div class="search-icon"><i data-lucide="search" class="lucide-icon-search"></i></div>
+        <input type="text" id="searcher" class="searcher" placeholder="Buscar...">
+        
+      </div>
+      <div class="nav-options_root" title="Volver a la raiz">
+      </div>
+      <div class="nav-options_marked" title="Nodos importantes"></div>
+    </div>
+    </div>
+    <div id="profile-pic" class="profile-pic" title="mi perfil"></div>
+  </header>
+  <div id="profile-menu" class="profile-menu hidden">
+   <div class="menu-username">
+     <i data-lucide="user" class="lucide-icon-menu-profile"></i>
+     <div id="menu-username"></div>
+   </div>
+   <ul>
+    <li id="tema">
+      <i data-lucide="sun-moon" class="lucide-icon-menu-profile"></i>
+      <div>Oscuro/claro</div>
+    </li>
+    <li id="cerrar-sesion">
+      <i data-lucide="log-out" class="lucide-icon-menu-profile"></i>
+      <div>Cerrar Sesion</div>
+    </li>
+   </ul>
+  </div>
+  <div class="listNodes"></div>
+  <svg width="100%" height="100%" id="main"></svg>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/js/index.js" type="module"></script>
+</body>
+</html>

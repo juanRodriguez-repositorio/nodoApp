@@ -1,0 +1,67 @@
+static mostrarNodo(nodoPadre) {
+  const svg = this.svg;
+  const padreX = window.innerWidth / 2;
+  const padreY = 200;
+  this.nodoActual = nodoPadre;
+
+  // Limpiar SVG completamente
+  svg.selectAll("*").remove();
+
+  // Dibujar nodo padre en posición final directamente
+  const nodoPadreVisual = new NodoVisual(nodoPadre, svg, this, padreX, padreY);
+
+  // Mostrar hijos si no está colapsado
+  if (!nodoPadre.colapsado) {
+    const numHijos = nodoPadre.hijos.length;
+    const separacion = 320;
+    const totalWidth = (numHijos - 1) * separacion;
+    const inicioX = padreX - totalWidth / 2;
+
+    nodoPadre.hijos.forEach((hijo, i) => {
+      const xFinal = inicioX + i * separacion;
+      const yFinal = padreY + 250;
+
+      // Flecha curva
+      const curva = `M ${padreX},${padreY + 100}
+                     C ${padreX},${padreY + 150},
+                       ${xFinal},${yFinal - 150},
+                       ${xFinal},${yFinal - 50}`;
+
+      svg.append("path")
+        .attr("d", curva)
+        .attr("stroke", "#0288d1")
+        .attr("stroke-width", 2)
+        .attr("fill", "none")
+        .attr("marker-end", "url(#flecha)");
+
+      const hijoVisual = new NodoVisual(hijo, svg, this, xFinal, yFinal);
+    });
+  }
+}
+
+dibujarFlecha(x1, y1, x2, y2) {
+  const defs = this.controlador.svg.select("defs");
+  if (defs.empty()) {
+    this.controlador.svg.append("defs").append("marker")
+      .attr("id", "flecha")
+      .attr("viewBox", "0 0 10 10")
+      .attr("refX", 10)
+      .attr("refY", 5)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 6)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M 0 0 L 10 5 L 0 10 z")
+      .attr("fill", "#0288d1");
+  }
+
+  const curva = `M ${x1},${y1} 
+                 C ${x1 + 100},${y1}, ${x2 - 100},${y2}, ${x2},${y2}`;
+
+  this.controlador.svg.append("path")
+    .attr("d", curva)
+    .attr("stroke", "#0288d1")
+    .attr("stroke-width", 2)
+    .attr("fill", "none")
+    .attr("marker-end", "url(#flecha)");
+ }
